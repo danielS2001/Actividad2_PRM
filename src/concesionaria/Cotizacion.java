@@ -5,7 +5,7 @@ package concesionaria;
 
 import java.util.Scanner;
 
-public class cotizacion {
+public class Cotizacion {
     //Atributos
     private int numeroCotizacion;
     private String descripcionAutomovil;
@@ -13,13 +13,9 @@ public class cotizacion {
     private double porcentajePagoInicial;
     private int plazo;
     
-    private double pagoInicial;
-    private double pagoFinal;
-    private double pagoMensual;
-    
     //Constructores
     //Constructor vacio
-    cotizacion() {
+    Cotizacion() {
         this.numeroCotizacion = 0;
         this.descripcionAutomovil = "";
         this.precio = 0.0;
@@ -28,7 +24,7 @@ public class cotizacion {
     }
     
     //Constructor de parametros
-    cotizacion(int numeroCotizacion, String descripcionAutomovil, double precio, double porcentajePagoInicial, int plazo) {
+    Cotizacion(int numeroCotizacion, String descripcionAutomovil, double precio, double porcentajePagoInicial, int plazo) {
         this.numeroCotizacion = numeroCotizacion;
         this.descripcionAutomovil = descripcionAutomovil;
         this.precio = precio;
@@ -37,7 +33,7 @@ public class cotizacion {
     }
     
     //Constructor de copia
-    cotizacion(cotizacion costo) {
+    Cotizacion(Cotizacion costo) {
         this.numeroCotizacion = costo.numeroCotizacion;
         this.descripcionAutomovil = costo.descripcionAutomovil;
         this.precio = costo.precio;
@@ -116,16 +112,22 @@ public class cotizacion {
     }
     
     //Funciones
-    public void sacarPagoInicial() {
+    public double sacarPagoInicial() {
+        double pagoInicial;
         pagoInicial = precio * (porcentajePagoInicial  / 100);
+        return pagoInicial;
     }
     
-    public void sacarTotalFinal() {
-        pagoFinal = precio - pagoInicial;
+    public double sacarTotalFinal() {
+        double pagoFinal;
+        pagoFinal = precio - sacarPagoInicial();
+        return pagoFinal;
     }
     
-    public void sacarPagoMensual() {
-        pagoMensual = pagoFinal / plazo;
+    public double sacarPagoMensual() {
+        double pagoMensual;
+        pagoMensual = sacarTotalFinal() / plazo;
+        return pagoMensual;
     }
     
     public void introducirDatos() {
@@ -147,11 +149,11 @@ public class cotizacion {
         System.out.println("El numero de cotizacion es " +numeroCotizacion);
         System.out.println("La descripcion es " +descripcionAutomovil);
         System.out.println("El precio del automovil es de $" +precio);
-        System.out.println("El porcentaje de pago inicial es de %" +pagoInicial);
+        System.out.println("El porcentaje de pago inicial es de %" +sacarPagoInicial());
         System.out.println("El plazo es de " +plazo +" meses");
-        System.out.println("Pago inicial: $" +pagoInicial);
-        System.out.println("Total a fin: $" +pagoFinal);
-        System.out.println("Pago mensual: $" +pagoMensual);
+        System.out.println("Pago inicial: $" +sacarPagoInicial());
+        System.out.println("Total a fin: $" +sacarTotalFinal());
+        System.out.println("Pago mensual: $" +sacarPagoMensual());
         
     }
 

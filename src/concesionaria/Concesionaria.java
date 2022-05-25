@@ -7,7 +7,7 @@ public class Concesionaria {
 
 
     public static void main(String[] args) {
-        cotizacion coti = new cotizacion();
+        Cotizacion coti = new Cotizacion();
         coti.introducirDatos();
         coti.sacarPagoInicial();
         coti.sacarTotalFinal();
